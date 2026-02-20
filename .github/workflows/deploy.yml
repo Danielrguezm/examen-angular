@@ -24,6 +24,17 @@ jobs:
       - name: Build Angular
         run: npm run build -- --configuration production
 
+      # 🔥 BORRAR CONTENIDO ANTERIOR
+      - name: Clean VPS folder
+        uses: appleboy/ssh-action@v1.0.0
+        with:
+          host: ${{ secrets.HOST }}
+          username: root
+          password: ${{ secrets.PASSWORD }}
+          script: |
+            rm -rf /var/www/html/examen/*
+
+      # 🚀 SUBIR NUEVO BUILD
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -32,3 +43,4 @@ jobs:
           password: ${{ secrets.PASSWORD }}
           source: "dist/examen-angular/browser/*"
           target: "/var/www/html/examen"
+
