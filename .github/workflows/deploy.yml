@@ -34,7 +34,10 @@ jobs:
           script: |
             rm -rf /var/www/html/examen/*
 
+
       # 🚀 SUBIR NUEVO BUILD
+
+      
       - name: Deploy to VPS
         uses: appleboy/scp-action@v0.1.4
         with:
@@ -42,5 +45,6 @@ jobs:
           username: root
           password: ${{ secrets.PASSWORD }}
           source: "dist/examen-angular/browser/*"
-          target: "/var/www/html/examen"
-
+          target: "/var/www/html/examen/"
+          strip_components: 3
+ 
